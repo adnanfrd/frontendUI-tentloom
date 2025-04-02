@@ -1,6 +1,5 @@
-'use client';
-
-import { useState } from 'react';
+"use client";
+import { useState, useEffect } from 'react';  // Import useEffect hook
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
@@ -22,9 +21,10 @@ const AddApartment = () => {
     monthlyAmount: '',
   });
 
-  useState(() => {
+  // Use useEffect to ensure gsap runs only on the client
+  useEffect(() => {
     gsap.from('.form-container', { opacity: 0, y: 50, duration: 1, ease: 'power3.out' });
-  });
+  }, []);  // Empty dependency array ensures it runs only after component mounts
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -39,11 +39,11 @@ const AddApartment = () => {
   return (
     <motion.div className='max-w-lg mx-auto p-6 bg-white rounded-lg shadow-lg mt-10 form-container'>
       <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} className='mb-4 '>
-       <Link href="/dashboard">
-       <button  type='button' onClick={() => router.back()} className='bg-gray-500 cursor-pointer text-white py-2 px-4 rounded-lg'>
-          Back
-        </button>
-       </Link>
+        <Link href="/dashboard">
+          <button type='button' onClick={() => router.back()} className='bg-gray-500 cursor-pointer text-white py-2 px-4 rounded-lg'>
+            Back
+          </button>
+        </Link>
       </motion.div>
       <h2 className='text-2xl font-bold text-center mb-6'>Add New Apartment</h2>
       <form onSubmit={handleSubmit} className='space-y-4'>
