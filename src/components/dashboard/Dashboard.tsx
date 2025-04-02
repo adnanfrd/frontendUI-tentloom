@@ -82,7 +82,7 @@ const Dashboard = () => {
 
 
 
-      <Link href="/dashboard">
+      <Link href="/addapartment">
         <motion.button
           ref={buttonRef}
           whileHover={{ scale: 1.05 }}
